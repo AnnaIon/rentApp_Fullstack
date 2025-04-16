@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/axios";
+import { successToast, errorToast } from "../../toastify/toastify";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -12,11 +13,11 @@ const ResetPassword = () => {
     try {
       const res = await api.post(`/resetPassword/${token}`, { password });
       if (res.data.status === "succes") {
-        alert("Password updated successfully.");
+        successToast("Password updated successfully.");
         navigate("/authentication/login");
       }
     } catch (err) {
-      alert("Token expired or invalid.");
+      errorToast("Token expired or invalid.");
     }
   };
 

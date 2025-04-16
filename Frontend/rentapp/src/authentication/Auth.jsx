@@ -12,8 +12,8 @@ const Auth = () => {
   return currentUser ? (
     <Navigate to="/homepage" />
   ) : (
-    <div className="relative min-h-screen w-full overflow-hidden">
-      <Swiper
+    <>
+          <Swiper
         effect="fade"
         speed={1200}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
@@ -44,7 +44,9 @@ const Auth = () => {
           <Outlet />
         </div>
       </div>
-    </div>
+
+    </>
+    
   );
 };
 

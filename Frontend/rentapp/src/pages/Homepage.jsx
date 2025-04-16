@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/NavBar";
 import api from "../services/axios";
 import FlatCard from "../components/FlatCard";
-import FilterSidebar from "../components/FilterSideBar"; 
+import FilterSidebar from "../components/FilterSideBar";
 
 const Homepage = () => {
   const [apartments, setApartments] = useState([]);
-  const [isFilterOpen, setIsFilterOpen] = useState(false); 
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filter, setFilter] = useState({
     AZ: false,
     ZA: false,
@@ -34,22 +34,24 @@ const Homepage = () => {
     try {
       const response = await api.patch(`/apartment/favorite/${id}`);
       const updatedApartment = response.data.data;
-  
+
       setApartments((prev) =>
         prev.map((apt) =>
-          apt._id === id ? { ...apt, favoritedBy: updatedApartment.favoritedBy } : apt
+          apt._id === id
+            ? { ...apt, favoritedBy: updatedApartment.favoritedBy }
+            : apt
         )
       );
     } catch (err) {
       console.error("Error toggling favorite:", err);
     }
   };
-  
+
   const applyFilters = async () => {
     try {
       const response = await api.post("/filterApartments", filter);
       setApartments(response.data.data);
-      setIsFilterOpen(false); 
+      setIsFilterOpen(false);
     } catch (err) {
       console.error("Error applying filters:", err);
     }
@@ -60,8 +62,8 @@ const Homepage = () => {
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="relative flex items-center justify-center mb-6">
-          <h1 className="text-4xl font-bold text-orange-600 text-center">
-            Explore Available Apartments
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-orange-600 text-center">
+    fu        Explore Available Apartments
           </h1>
           <button
             onClick={() => setIsFilterOpen((prev) => !prev)}
