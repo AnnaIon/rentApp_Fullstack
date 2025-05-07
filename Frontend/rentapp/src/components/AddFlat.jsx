@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import api from "../services/axios";
 import { successToast, errorToast } from "../toastify/toastify";
 
+/**
+ * AddFlat component allows users to submit a form
+ * for adding a new apartment listing to the system.
+ */
 const AddFlat = ({ onFlatAdded }) => {
+  // Local state for form inputs
   const [formData, setFormData] = useState({
     title: "",
     city: "",
@@ -13,6 +18,7 @@ const AddFlat = ({ onFlatAdded }) => {
     hasAC: false,
   });
 
+  // Handle changes to form inputs
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
     setFormData({
@@ -21,13 +27,18 @@ const AddFlat = ({ onFlatAdded }) => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Send POST request to backend
       const res = await api.post("/addApartment", formData);
       successToast("Flat added successfully!");
-      onFlatAdded(res.data.data); 
 
+      // Notify parent component to update UI
+      onFlatAdded(res.data.data);
+
+      // Reset form
       setFormData({
         title: "",
         city: "",
@@ -50,6 +61,7 @@ const AddFlat = ({ onFlatAdded }) => {
     >
       <h2 className="text-2xl font-bold text-orange-600 mb-4">Add New Flat</h2>
 
+      {/* Render input fields dynamically */}
       {["title", "city", "streetName", "price", "areaSize", "yearBuild"].map((field) => (
         <div key={field}>
           <label htmlFor={field} className="block font-medium text-gray-700">
@@ -65,6 +77,7 @@ const AddFlat = ({ onFlatAdded }) => {
         </div>
       ))}
 
+      {/* Checkbox for AC */}
       <div>
         <label htmlFor="hasAC" className="inline-flex items-center text-sm">
           <input
@@ -78,6 +91,7 @@ const AddFlat = ({ onFlatAdded }) => {
         </label>
       </div>
 
+      {/* Submit button */}
       <button
         type="submit"
         className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition w-full font-semibold"

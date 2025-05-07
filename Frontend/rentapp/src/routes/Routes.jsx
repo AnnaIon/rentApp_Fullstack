@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 
+// Pages and components
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Homepage from "../pages/Homepage";
@@ -11,84 +12,87 @@ import Auth from "../authentication/Auth";
 import AdminRoute from "./AdminRoute";
 import AllUsers from "../pages/AllUsers";
 import Inbox from "../pages/Inbox";
+
+// Password management pages
 import ForgotPassword from "../components/password/ForgotPassword";
 import UpdatePassword from "../components/password/UpdatePassword";
 import ResetPassword from "../components/password/ResetPassword";
+
+// Define route structure
 const routesArray = [
   {
     path: "/",
-    element: <App />,
+    element: <App />, // Root layout component
     children: [
       {
         index: true,
-        element: <Navigate to="/authentication" />,
+        element: <Navigate to="/authentication" />, // Redirect root to authentication
       },
       {
         path: "authentication",
-        element: <Auth />,
+        element: <Auth />, // Authentication layout (Login/Register)
         children: [
           {
             index: true,
-            element: <Navigate to="login" />,
+            element: <Navigate to="login" />, // Default to login if /authentication
           },
           {
             path: "login",
-            element: <Login />,
+            element: <Login />, // Login page
           },
           {
             path: "register",
-            element: <Register />,
+            element: <Register />, // Registration page
           },
         ],
       },
       {
         path: "homepage",
-        element: <Homepage />,
+        element: <Homepage />, // Main homepage after login
       },
       {
         path: "myflats",
-        element: <MyFlats />,
+        element: <MyFlats />, // User's own flats
       },
       {
         path: "myprofile",
-        element: <MyProfile />,
+        element: <MyProfile />, // User profile
       },
       {
         path: "favourites",
-        element: <Favourites />,
+        element: <Favourites />, // User's saved flats
       },
       {
         path: "inbox",
-        element: <Inbox />,
+        element: <Inbox />, // Chat/inbox feature
       },
-
       {
         path: "all-users",
-        element: <AdminRoute />,
+        element: <AdminRoute />, // Admin-only route wrapper
         children: [
           {
             path: "",
-            element: <AllUsers />,
+            element: <AllUsers />, // Admin user management
           },
         ],
       },
       {
         path: "/forgot-password",
-        element: <ForgotPassword />
+        element: <ForgotPassword />, // Forgot password form
       },
       {
         path: "/reset-password/:token",
-        element: <ResetPassword />
+        element: <ResetPassword />, // Password reset with token
       },
       {
         path: "/update-password",
-        element: <UpdatePassword />
-      }
-      
+        element: <UpdatePassword />, // Update password after login
+      },
     ],
   },
 ];
 
+// Create and export browser router instance
 const Routes = createBrowserRouter(routesArray);
 
 export default Routes;

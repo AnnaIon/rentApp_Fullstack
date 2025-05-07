@@ -1,26 +1,33 @@
 import React from "react";
 
+// Reusable profile card form component for displaying and updating user info
 const MyProfileCard = ({
-  formTitle,
-  fields,
-  userData,
-  onChange,
-  onSubmit,
-  isLoading,
-  submitText,
-  extraContent,
+  formTitle,      // Title at the top of the form (e.g. "My Profile")
+  fields,         // Array of field configs: id, label, type, placeholder, etc.
+  userData,       // Current user data (used to populate input values)
+  onChange,       // Handler for input change events
+  onSubmit,       // Handler for form submission
+  isLoading,      // Boolean for showing loading state on submit button
+  submitText,     // Text displayed on the submit button
+  extraContent,   // Optional extra JSX below the form (e.g. edit/delete buttons)
 }) => {
   return (
     <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 ease-in-out transform text-center w-full max-w-md">
+      {/* Form title */}
       <h2 className="text-2xl font-bold mb-6 text-orange-600 drop-shadow-sm">
         {formTitle}
       </h2>
+
+      {/* Form fields */}
       <form onSubmit={onSubmit} className="space-y-5 text-left">
         {fields.map(({ id, label, type, placeholder, ...rest }) => (
           <div key={id}>
+            {/* Input label */}
             <label htmlFor={id} className="block text-sm font-semibold mb-1 text-gray-700">
               {label}
             </label>
+
+            {/* Input field */}
             <input
               type={type}
               id={id}
@@ -34,8 +41,10 @@ const MyProfileCard = ({
           </div>
         ))}
 
+        {/* Extra content (optional) */}
         {extraContent && <div>{extraContent}</div>}
 
+        {/* Submit button */}
         <button
           type="submit"
           disabled={isLoading}

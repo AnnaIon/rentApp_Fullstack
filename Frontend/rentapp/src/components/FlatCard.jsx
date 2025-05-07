@@ -9,6 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; 
 import FlatCardEdit from "./FlatCardEdit";
 
+/**
+ * FlatCard Component
+ * Displays apartment information with optional edit/delete/favorite actions
+ */
 const FlatCard = ({
   flat,
   onToggleFavorite,
@@ -22,37 +26,44 @@ const FlatCard = ({
   const navigate = useNavigate();
   const { user } = useAuth();
 
+  // Save edited data
   const handleSave = (updatedFlat) => {
     onEdit && onEdit(updatedFlat);
     setIsEditing(false);
   };
 
+  // Cancel editing
   const handleCancel = () => {
     setIsEditing(false);
   };
 
+  // Navigate to Inbox with selected user for messaging
   const handleMessageOwner = () => {
     navigate("/inbox", { state: { userId: flat.createdBy?._id } });
   };
 
+  // Check if the logged-in user is the owner
   const isOwner = user?._id === flat.createdBy?._id;
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 relative text-center">
-{showFavorite && (
-  <button
-    onClick={() => onToggleFavorite(flat._id)}
-    className="absolute top-4 right-4"
-    title={flat.favoritedBy?.includes(user?._id) ? "Unfavorite" : "Favorite"}
-  >
-    {flat.favoritedBy?.includes(user?._id) ? (
-      <HeartSolid className="w-6 h-6 text-red-500 hover:scale-110 transition" />
-    ) : (
-      <HeartOutline className="w-6 h-6 text-gray-400 hover:text-red-500 hover:scale-110 transition" />
-    )}
-  </button>
-)}
+      
+      {/* Favorite button (if enabled) */}
+      {showFavorite && (
+        <button
+          onClick={() => onToggleFavorite(flat._id)}
+          className="absolute top-4 right-4"
+          title={flat.favoritedBy?.includes(user?._id) ? "Unfavorite" : "Favorite"}
+        >
+          {flat.favoritedBy?.includes(user?._id) ? (
+            <HeartSolid className="w-6 h-6 text-red-500 hover:scale-110 transition" />
+          ) : (
+            <HeartOutline className="w-6 h-6 text-gray-400 hover:text-red-500 hover:scale-110 transition" />
+          )}
+        </button>
+      )}
 
+      {/* Edit button (if allowed and not editing) */}
       {showEdit && !isEditing && (
         <button
           onClick={() => setIsEditing(true)}
@@ -63,6 +74,7 @@ const FlatCard = ({
         </button>
       )}
 
+      {/* Delete button (if allowed) */}
       {showDelete && (
         <button
           onClick={() => onDelete(flat._id)}
@@ -73,12 +85,13 @@ const FlatCard = ({
         </button>
       )}
 
+      {/* Render editable form or display flat info */}
       {isEditing ? (
         <FlatCardEdit flat={flat} onSave={handleSave} onCancel={handleCancel} />
       ) : (
         <>
           <h2
-            className="text-xl font-bold mb- 2"
+            className="text-xl font-bold mb-2"
             style={{ color: "oklch(83.7% 0.128 66.29)" }}
           >
             {flat.title}
@@ -95,6 +108,7 @@ const FlatCard = ({
             Built: {new Date(flat.yearBuild).toLocaleDateString()}
           </p>
 
+          {/* Message button only visible if current user is not the owner */}
           {flat.createdBy && !isOwner && (
             <button
               onClick={handleMessageOwner}

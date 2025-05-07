@@ -1,14 +1,20 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+// Rename the Swiper import to avoid conflict with your component name
+import { Swiper as SwiperCore, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
 
+/**
+ * Swiper - Background image slider with fade effect and autoplay.
+ * This is the hero section of the RentApp homepage.
+ */
 const Swiper = () => {
   return (
     <div className="relative h-screen w-full">
-      <Swiper
+      {/* Swiper slider component */}
+      <SwiperCore
         effect="fade"
         loop={true}
         autoplay={{ delay: 4000 }}
@@ -36,8 +42,9 @@ const Swiper = () => {
             className="w-full h-full object-cover"
           />
         </SwiperSlide>
-      </Swiper>
+      </SwiperCore>
 
+      {/* Overlay text content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center">
         <h1 className="text-4xl font-bold drop-shadow-lg">Welcome to RentApp</h1>
         <p className="text-lg mt-4 max-w-lg drop-shadow">

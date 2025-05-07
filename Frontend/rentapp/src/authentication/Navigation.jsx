@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaSignInAlt, FaUserPlus } from "react-icons/fa";
 
+// Define navigation options with labels, icons, and paths
 const Routes = [
   { label: "Login", icon: <FaSignInAlt />, path: "/authentication/login" },
   { label: "Register", icon: <FaUserPlus />, path: "/authentication/register" },
 ];
 
 const Navigation = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0); // Track which tab is currently active
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Update active tab index when the URL changes
   useEffect(() => {
     const routeIndex = Routes.findIndex((route) =>
       location.pathname.includes(route.path)
@@ -21,6 +23,7 @@ const Navigation = () => {
     }
   }, [location.pathname]);
 
+  // Navigate to the selected route and update the active tab
   const handleChange = (newValue) => {
     setValue(newValue);
     navigate(Routes[newValue].path);
@@ -28,6 +31,7 @@ const Navigation = () => {
 
   return (
     <div className="w-full bg-white/20 backdrop-blur-md rounded-xl shadow-lg max-w-md mt-2">
+      {/* Render the navigation buttons */}
       <div className="flex justify-around items-center p-3">
         {Routes.map((route, index) => (
           <button

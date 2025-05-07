@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/axios";
 
+/**
+ * FilterSidebar Component
+ * Allows users to apply filters to the apartment list:
+ * - Sort order (A-Z / Z-A)
+ * - City selection
+ * - Area size range
+ * - Price range
+ */
 const FilterSidebar = ({ filter, setFilter, onApply }) => {
   const [cities, setCities] = useState([]);
 
+  // Fetch unique cities from all apartments on initial render
   useEffect(() => {
     const fetchCities = async () => {
       try {
@@ -19,6 +28,7 @@ const FilterSidebar = ({ filter, setFilter, onApply }) => {
     fetchCities();
   }, []);
 
+  // Handle input changes and update filter state accordingly
   const handleChange = (e) => {
     const { name, type, value, checked } = e.target;
     setFilter((prev) => ({
@@ -27,6 +37,7 @@ const FilterSidebar = ({ filter, setFilter, onApply }) => {
     }));
   };
 
+  // Reset all filter options to default state
   const resetFilter = () => {
     setFilter({
       AZ: false,
@@ -43,6 +54,7 @@ const FilterSidebar = ({ filter, setFilter, onApply }) => {
     <div className="bg-white/90 p-4 rounded-xl shadow-lg max-w-xs w-full">
       <h2 className="text-xl font-bold text-orange-600 mb-4">Filter Flats</h2>
 
+      {/* Sort Options */}
       <div className="mb-4">
         <label className="font-semibold">Sort by:</label>
         <div className="flex gap-2 mt-2">
@@ -67,6 +79,7 @@ const FilterSidebar = ({ filter, setFilter, onApply }) => {
         </div>
       </div>
 
+      {/* City Dropdown */}
       <div className="mb-4">
         <label className="font-semibold">City:</label>
         <select
@@ -84,6 +97,7 @@ const FilterSidebar = ({ filter, setFilter, onApply }) => {
         </select>
       </div>
 
+      {/* Area Size Filter */}
       <div className="mb-4">
         <label className="font-semibold">Area Size (m²):</label>
         <div className="flex gap-2 mt-2">
@@ -106,6 +120,7 @@ const FilterSidebar = ({ filter, setFilter, onApply }) => {
         </div>
       </div>
 
+      {/* Price Filter */}
       <div className="mb-4">
         <label className="font-semibold">Price $:</label>
         <div className="flex gap-2 mt-2">
@@ -128,6 +143,7 @@ const FilterSidebar = ({ filter, setFilter, onApply }) => {
         </div>
       </div>
 
+      {/* Filter Actions */}
       <div className="flex justify-between">
         <button
           onClick={onApply}
