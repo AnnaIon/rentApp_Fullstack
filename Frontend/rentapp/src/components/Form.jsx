@@ -1,15 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // Reusable user form component used for login, registration, etc.
 const UserForm = ({
-  formTitle,     // Title displayed at the top of the form
-  fields,        // Array of field objects (id, label, type, etc.)
-  userData,      // Current form values
-  onChange,      // Function to handle input changes
-  onSubmit,      // Function to handle form submission
-  isLoading,     // Boolean to indicate loading/submitting state
-  submitText,    // Button text
-  extraContent,  // Optional additional JSX (e.g., error message, links)
+  formTitle, // Title displayed at the top of the form
+  fields, // Array of field objects (id, label, type, etc.)
+  userData, // Current form values
+  onChange, // Function to handle input changes
+  onSubmit, // Function to handle form submission
+  isLoading, // Boolean to indicate loading/submitting state
+  submitText, // Button text
+  extraContent, // Optional additional JSX (e.g., error message, links)
 }) => {
   return (
     <div className="bg-white/10 backdrop-blur-lg rounded-xl shadow-xl overflow-hidden w-full max-w-md">
@@ -44,7 +45,18 @@ const UserForm = ({
 
           {/* Optional extra content (e.g., error message, links) */}
           {extraContent && <div>{extraContent}</div>}
+          {formTitle === "Log In" && (
+          <p className="mt-4">
+          Forgot your password?{" "}
+          <Link to="/forgot-password" className="text-blue-600 underline">
+            Reset it here
+          </Link>
+        </p>
 
+
+          )
+
+          }
           {/* Submit button */}
           <button
             type="submit"

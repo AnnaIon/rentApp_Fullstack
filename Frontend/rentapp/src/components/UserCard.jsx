@@ -17,7 +17,7 @@ const UserCard = ({ user }) => {
 
       {/* Number of apartments listed by the user */}
       <p className="text-sm text-gray-700">
-        <span className="font-semibold">Flats:</span> {user.apartments?.length || 0}
+        <span className="font-semibold">Flats:</span> {user.apartments?.length -1 <0 ? 0: user.apartments?.length -1 }
       </p>
     </div>
   );

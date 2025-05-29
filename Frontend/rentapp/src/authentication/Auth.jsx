@@ -45,7 +45,7 @@ const Auth = () => {
 
       {/* Foreground container holding the login/register form */}
       <div className="absolute inset-0 z-10 flex items-center justify-center pb-40">
-        <div className="w-full max-w-md p-6 bg-white/20 backdrop-blur-lg rounded-lg shadow-lg">
+        <div className="w-full max-w-md p-6 mt-37 bg-white/20 backdrop-blur-lg rounded-lg shadow-lg">
           <Outlet /> {/* Renders either Login or Register page depending on the route */}
         </div>
       </div>

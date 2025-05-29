@@ -33,7 +33,10 @@ const MyFlats = () => {
   // Handle editing a flat
   const handleEdit = async (updatedFlat) => {
     try {
-      const response = await api.patch(`/updateApartment/${updatedFlat._id}`, updatedFlat); // PATCH request to update apartment
+      const response = await api.patch(
+        `/updateApartment/${updatedFlat._id}`,
+        updatedFlat
+      ); // PATCH request to update apartment
       setFlats((prev) =>
         prev.map((flat) =>
           flat._id === updatedFlat._id ? response.data.data : flat
@@ -50,7 +53,11 @@ const MyFlats = () => {
       <Navbar />
 
       {/* Main content section, blurred if AddFlat modal is open */}
-      <div className={`p-6 transition-all duration-300 ${showAddFlat ? "blur-sm" : ""}`}>
+      <div
+        className={`p-6 transition-all duration-300 ${
+          showAddFlat ? "blur-sm" : ""
+        }`}
+      >
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-orange-700">My Flats</h1>
           {/* Button to toggle AddFlat modal */}
@@ -69,13 +76,14 @@ const MyFlats = () => {
       {/* Modal for adding a flat */}
       {showAddFlat && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+          <div className="bg-white mt-10 rounded-lg shadow-lg p-6 w-full max-w-md relative">
             {/* Close button for modal */}
             <button
               onClick={() => setShowAddFlat(false)}
-              className="absolute top-2 right-2 text-white bg-red-500 hover:bg-red-600 rounded-full w-6 h-6 flex items-center justify-center"
+              className="absolute top-1 right-2 text-red-500 text-xl hover:text-red-700 transition-all"
+              aria-label="Close"
             >
-              &times;
+              ×
             </button>
             {/* AddFlat component inside modal */}
             <AddFlat onFlatAdded={handleFlatAdded} />

@@ -57,7 +57,7 @@ const AddFlat = ({ onFlatAdded }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 p-6 bg-white rounded-xl shadow-xl max-h-[80vh] overflow-y-auto"
+      className="space-y-4 p-6  bg-white rounded-xl shadow-xl max-h-[80vh] overflow-y-auto"
     >
       <h2 className="text-2xl font-bold text-orange-600 mb-4">Add New Flat</h2>
 

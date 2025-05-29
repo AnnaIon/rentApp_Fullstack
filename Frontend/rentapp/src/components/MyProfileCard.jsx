@@ -9,10 +9,13 @@ const MyProfileCard = ({
   onSubmit,       // Handler for form submission
   isLoading,      // Boolean for showing loading state on submit button
   submitText,     // Text displayed on the submit button
-  extraContent,   // Optional extra JSX below the form (e.g. edit/delete buttons)
+  extraContent,
+  isEditing   // Optional extra JSX below the form (e.g. edit/delete buttons)
 }) => {
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition duration-300 ease-in-out transform text-center w-full max-w-md">
+    <div className={`p-6 rounded-2xl border w-full max-w-md text-center transition-all duration-300 ease-in-out
+      ${isEditing ? "bg-orange-50 border-orange-300 shadow-lg" : "bg-white border-gray-100 shadow-md"}
+    `}>
       {/* Form title */}
       <h2 className="text-2xl font-bold mb-6 text-orange-600 drop-shadow-sm">
         {formTitle}

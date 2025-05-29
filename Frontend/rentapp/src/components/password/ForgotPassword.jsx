@@ -29,34 +29,37 @@ const ForgotPassword = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 space-y-4">
-      {/* Email input field */}
-      <input
-        type="email"
-        placeholder="Your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="border p-2 w-full"
-        required
-      />
-
-      {/* Action buttons */}
-      <div className="flex justify-between">
-        <button
-          type="submit"
-          className="bg-orange-500 text-white px-4 py-2 rounded"
-        >
-          Send Reset Link
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate("/myprofile")}
-          className="bg-orange-500 text-white px-4 py-2 rounded"
-        >
-          Return to my profile
-        </button>
-      </div>
-    </form>
+    <form
+    onSubmit={handleSubmit}
+    className="max-w-md mx-auto mt-20 p-6 space-y-4 bg-white rounded-lg shadow-md "
+  >
+    {/* Email input field */}
+    <input
+      type="email"
+      placeholder="Your email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      className="border p-2 w-full rounded text-sm"
+      required
+    />
+  
+    {/* Action buttons */}
+    <div className="flex justify-between">
+      <button
+        type="submit"
+        className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded text-sm"
+      >
+        Send Reset Link
+      </button>
+      <button
+        type="button"
+        onClick={() => navigate("/")}
+        className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded text-sm"
+      >
+        Return to login
+      </button>
+    </div>
+  </form>
   );
 };
 
