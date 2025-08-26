@@ -33,26 +33,19 @@ const UserSchema = new template({
           validator: function (value) {
             const today = new Date();
             const birth = new Date(value);
-            
             let age = today.getFullYear() - birth.getFullYear();
             const monthDiff = today.getMonth() - birth.getMonth();
-            
-            if (
-              monthDiff < 0 ||
-              (monthDiff === 0 && today.getDate() < birth.getDate())
-            ) {
-              age--; 
+      
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+              age--;
             }
       
-            if (age < 18) {
-              this.invalidate('birthDate', "You must be at least 18 years old.");
-              return false;
-            }
-      
-            return true;
+            return age >= 18; // ✔️ Only return true or false
           },
-        },
-      },
+          message: "You must be at least 18 years old." // ✔️ This message shows on false
+        }
+      }
+,      
     passwordChangeAt: Date,
     activeToken: {
         type: String,
