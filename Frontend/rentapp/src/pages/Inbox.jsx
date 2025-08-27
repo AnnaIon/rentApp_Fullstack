@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/NavBar";
-import MessagesPage from "../components/Chat/MessagesPage";
+import MessagesPage from "../components/chat/MessagesPage";
 import api from "../services/axios";
 import { useAuth } from "../context/AuthContext";
 import { useLocation } from "react-router-dom";
