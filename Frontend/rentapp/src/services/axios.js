@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 // Create an Axios instance with a base URL for the backend server
 const api = axios.create({
-  baseURL: "http://localhost:4000", // Change this to your deployed backend URL in production
+  baseURL: "https://rentapp-03a7e5a6efce.herokuapp.com/", // Change this to your deployed backend URL in production
 });
 
 // Request interceptor to include the JWT token from cookies

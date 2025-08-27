@@ -162,7 +162,7 @@ exports.forgotPassword = async (request, response) => {
 
   // const resetUrl = `${request.protocol}://${request.get('host')}/resetPassword/${resetToken}`;
 
-  const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
+  const resetUrl = `http://rentappcourse.netlify.app/reset-password/${resetToken}`;
   const message = `Follow this link to reset your password\n${resetUrl}.This link will expire in 10 minutes.`;
 
   try {
