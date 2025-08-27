@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/NavBar";
-import UserFlats from "../components/userFlats";
+import UserFlats from "../components/UserFlats";
 import AddFlat from "../components/AddFlat";
 import api from "../services/axios";
 
