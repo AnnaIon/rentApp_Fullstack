@@ -11,20 +11,16 @@ const messageRoutes = require("./routes/routesMessages");
 
 const app = express();
 
-// ------------------- CORS -------------------
-// Make sure this is before any routes
-app.use(cors({
-  origin: process.env.FRONTEND_URL,  // Netlify URL
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,   // Exact Netlify URL
+  credentials: true,                   // Allow cookies / Authorization header
+  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"]
+};
 
-// Handle OPTIONS preflight requests globally
-app.options("*", cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true
-}));
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));  // Preflight handler
+
 
 // ------------------- Middleware -------------------
 app.use(express.json());
